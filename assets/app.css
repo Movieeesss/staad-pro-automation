@@ -1,0 +1,53 @@
+/* Mobile-first / PWA layer. Loaded after tailwind.css. */
+:root{color-scheme:dark;--sat:env(safe-area-inset-top,0px);--sar:env(safe-area-inset-right,0px);--sab:env(safe-area-inset-bottom,0px);--sal:env(safe-area-inset-left,0px)}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior:none;scroll-padding-top:var(--sat);background:#090d16}
+body.app-body{min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-tap-highlight-color:transparent;
+  padding-top:max(.5rem,var(--sat));padding-right:max(.5rem,var(--sar));padding-bottom:max(1rem,calc(var(--sab) + .5rem));padding-left:max(.5rem,var(--sal))}
+@media (min-width:640px){body.app-body{padding-top:max(1rem,var(--sat));padding-right:max(1rem,var(--sar));padding-left:max(1rem,var(--sal))}}
+@media (min-width:1024px){body.app-body{padding-top:max(1.5rem,var(--sat));padding-right:max(1.5rem,var(--sar));padding-left:max(1.5rem,var(--sal))}}
+body.no-scroll{overflow:hidden}
+
+button,select,input,label{touch-action:manipulation}
+button{-webkit-user-select:none;user-select:none}
+
+/* Horizontally scrollable strips (tabs, action bars) with native touch physics */
+.scroll-x{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none;touch-action:pan-x pan-y}
+.scroll-x::-webkit-scrollbar{display:none;width:0;height:0}
+.scroll-x>*{flex-shrink:0;scroll-snap-align:start}
+
+/* Touch ergonomics */
+@media (pointer:coarse){
+  button,select,input[type=number],input[type=text]{min-height:42px}
+  input,select,textarea{font-size:16px!important} /* stops iOS focus-zoom */
+  input[type=checkbox]{width:22px;height:22px}
+}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;height:36px;touch-action:pan-y}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:9999px;background:#1e293b}
+input[type=range]::-moz-range-track{height:8px;border-radius:9999px;background:#1e293b}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-10px;border-radius:50%;background:#38bdf8;border:3px solid #0f172a;box-shadow:0 0 0 1px #38bdf8}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#38bdf8;border:3px solid #0f172a}
+
+/* Safe-area aware toast */
+#toastNotification{bottom:calc(1.25rem + var(--sab));right:max(1.25rem,var(--sar));max-width:calc(100vw - 2.5rem)}
+
+/* SFD / BMD canvas viewport: pinch-zoom, pan, probe */
+.canvas-viewport{position:relative;overflow:hidden;border-radius:.75rem;touch-action:none;-webkit-user-select:none;user-select:none;background:#020617}
+.canvas-stage{transform-origin:0 0;will-change:transform;backface-visibility:hidden}
+.canvas-tools{position:absolute;bottom:.5rem;right:.5rem;z-index:2;display:flex;gap:.375rem;align-items:center;padding:.25rem;border-radius:.75rem;background:rgba(2,6,23,.75);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid #1e293b}
+.canvas-tools button{min-width:40px;min-height:40px;padding:0 .5rem;border-radius:.5rem;background:#1e293b;color:#e2e8f0;font-weight:700;font-size:14px;border:1px solid #334155}
+.canvas-tools button[aria-pressed=true]{background:#0891b2;border-color:#22d3ee}
+.canvas-tools button:active{transform:scale(.94)}
+#zoomBadge{font:600 11px 'JetBrains Mono',monospace;color:#7dd3fc;min-width:3.2em;text-align:center}
+.canvas-viewport.canvas-fs{position:fixed;inset:0;z-index:60;border-radius:0;background:#020617}
+.canvas-viewport.canvas-fs .canvas-stage{width:calc(100% - var(--sal) - var(--sar));margin-left:var(--sal);margin-top:var(--sat)}
+.canvas-viewport.canvas-fs .canvas-tools{bottom:calc(.5rem + var(--sab));right:calc(.5rem + var(--sar))}
+
+/* Install / update banner */
+.pwa-banner{position:fixed;left:max(.75rem,var(--sal));right:max(.75rem,var(--sar));bottom:calc(.75rem + var(--sab));z-index:70;display:flex;gap:.75rem;align-items:center;justify-content:space-between;max-width:36rem;margin-inline:auto;padding:.75rem 1rem;border-radius:1rem;background:#0f172a;border:1px solid #0e7490;color:#e2e8f0;font-size:.8125rem;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.pwa-banner .actions{display:flex;gap:.5rem;flex-shrink:0}
+.pwa-banner button{min-height:40px;padding:0 .9rem;border-radius:.75rem;font-weight:700;background:#0891b2;color:#fff}
+.pwa-banner button.ghost{background:transparent;color:#94a3b8}
+
+@media (display-mode:standalone){#installBtn{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{.canvas-stage{transform:none!important}.canvas-tools,.pwa-banner{display:none!important}.canvas-viewport{overflow:visible}}

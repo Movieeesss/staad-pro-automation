@@ -1,0 +1,42 @@
+{
+  "id": "./",
+  "name": "STAAD.Pro Exact Engine - Multi-Beam Project Manager",
+  "short_name": "Beam Engine",
+  "description": "Offline continuous beam analyzer: exact direct-stiffness shear force and bending moment diagrams for multi-span, multi-beam projects.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "theme_color": "#090d16",
+  "background_color": "#090d16",
+  "categories": ["productivity", "utilities", "education", "business"],
+  "prefer_related_applications": false,
+  "launch_handler": { "client_mode": "navigate-existing" },
+  "icons": [
+    { "src": "icons/icon-72.png", "sizes": "72x72", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-96.png", "sizes": "96x96", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-128.png", "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "screenshots": [
+    { "src": "screenshots/mobile-1.png", "sizes": "540x960", "type": "image/png", "form_factor": "narrow", "label": "Beam workspace with SFD and BMD on a phone" },
+    { "src": "screenshots/mobile-2.png", "sizes": "540x960", "type": "image/png", "form_factor": "narrow", "label": "Multi-span configuration cards" },
+    { "src": "screenshots/desktop-1.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "Full workspace on desktop and tablet" }
+  ],
+  "shortcuts": [
+    { "name": "Add New Beam", "short_name": "New Beam", "description": "Create a new beam in the project", "url": "./?action=add-beam", "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96", "type": "image/png" }] },
+    { "name": "Beams Gallery", "short_name": "Gallery", "description": "Compare SFD and BMD of all beams", "url": "./?action=gallery", "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96", "type": "image/png" }] },
+    { "name": "380 kNm Benchmark", "short_name": "Benchmark", "description": "Load the STAAD.Pro 380 kNm benchmark", "url": "./?action=benchmark", "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96", "type": "image/png" }] }
+  ]
+}

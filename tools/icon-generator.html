@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beam Engine icon generator</title>
+<style>body{font-family:system-ui,sans-serif;background:#090d16;color:#e2e8f0;padding:1.5rem}button{margin:.25rem;padding:.6rem 1rem;border:0;border-radius:.6rem;background:#0891b2;color:#fff;font-weight:700;cursor:pointer}canvas{border:1px solid #334155;margin:.5rem;background:#000}</style></head>
+<body>
+<h1>App icon generator (Canvas)</h1>
+<p>Draws the same artwork as <code>icons/icon.svg</code>. Download any size; maskable icons are full-bleed with the artwork inside the 80% safe zone.</p>
+<div id="out"></div>
+<script>
+function drawIcon(size, rounded) {
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const x = c.getContext('2d'), k = size / 512;
+  x.scale(k, k);
+  x.fillStyle = '#090d16';
+  x.beginPath(); rounded ? x.roundRect(0, 0, 512, 512, 104) : x.rect(0, 0, 512, 512); x.fill();
+  x.lineCap = x.lineJoin = 'round';
+  x.strokeStyle = '#e2e8f0'; x.lineWidth = 14; x.beginPath(); x.moveTo(96, 190); x.lineTo(416, 190); x.stroke();
+  x.fillStyle = '#38bdf8';
+  [96, 256, 416].forEach(cx => { x.beginPath(); x.moveTo(cx, 198); x.lineTo(cx - 22, 234); x.lineTo(cx + 22, 234); x.closePath(); x.fill(); });
+  x.strokeStyle = '#475569'; x.lineWidth = 4; x.setLineDash([10, 10]); x.beginPath(); x.moveTo(96, 330); x.lineTo(416, 330); x.stroke(); x.setLineDash([]);
+  x.beginPath(); x.moveTo(96, 330); x.bezierCurveTo(120, 400, 200, 390, 256, 270); x.bezierCurveTo(312, 390, 392, 400, 416, 330);
+  x.fillStyle = 'rgba(56,189,248,.18)'; x.fill(); x.strokeStyle = '#38bdf8'; x.lineWidth = 12; x.stroke();
+  x.fillStyle = '#fb7185'; x.beginPath(); x.arc(256, 270, 15, 0, Math.PI * 2); x.fill();
+  return c;
+}
+[[192, true, 'icon-192.png'], [512, true, 'icon-512.png'], [192, false, 'icon-maskable-192.png'], [512, false, 'icon-maskable-512.png']].forEach(([s, r, name]) => {
+  const c = drawIcon(s, r); c.style.width = '128px'; c.style.height = '128px';
+  const b = document.createElement('button'); b.textContent = 'Download ' + name;
+  b.onclick = () => c.toBlob(bl => { const a = document.createElement('a'); a.href = URL.createObjectURL(bl); a.download = name; a.click(); });
+  document.getElementById('out').append(c, b);
+});
+</script></body></html>
