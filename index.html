@@ -67,13 +67,13 @@
             <div>
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded tracking-wider uppercase shadow">
-                        STAAD EXACT MOBILE V3.1
+                        STAAD EXACT MOBILE V3.2
                     </span>
                     <span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded">
                         100% Closed-Form DSM
                     </span>
                     <span class="bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
-                        📱 Touch HD Precision
+                        💾 Auto-Saved
                     </span>
                 </div>
                 <h1 class="text-lg sm:text-xl md:text-2xl font-black tracking-tight text-white mt-1">
@@ -83,11 +83,17 @@
 
             <!-- Top Actions -->
             <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full md:w-auto no-print">
+                <button onclick="shareProject()" title="Share Beam Analysis" class="flex-1 md:flex-none bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow flex items-center justify-center gap-1.5 active:scale-95">
+                    <span>📤</span> Share
+                </button>
                 <button onclick="openGalleryModal()" class="flex-1 md:flex-none bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow flex items-center justify-center gap-1.5 active:scale-95">
                     <span>📊</span> View All Beams
                 </button>
                 <button onclick="loadSTAADExact380Benchmark()" class="flex-1 md:flex-none bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow flex items-center justify-center gap-1.5 active:scale-95">
                     <span>🎯</span> 380 kNm STAAD
+                </button>
+                <button onclick="clearAllBeams()" title="Clear All and Start Fresh" class="flex-1 md:flex-none bg-rose-950/70 hover:bg-rose-900 border border-rose-700/60 text-rose-300 text-xs font-bold px-3 py-2 rounded-xl transition shadow flex items-center justify-center gap-1.5 active:scale-95">
+                    <span>🧹</span> Clear All Beams
                 </button>
                 <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-2.5 py-2 rounded-xl border border-slate-700 transition">
                     🖨️
@@ -131,7 +137,7 @@
             </div>
         </section>
 
-        <!-- Section & Material Properties -->
+        <!-- Section & Material Properties Accordion/Card -->
         <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 sm:p-4 shadow-xl no-print">
             <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2.5 mb-2.5">
                 <div class="flex items-center gap-2">
@@ -149,11 +155,11 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 text-xs">
                 <div>
                     <label class="block text-slate-400 font-semibold mb-1 text-[10px] uppercase">Width b (mm)</label>
-                    <input type="number" inputmode="decimal" id="beamWidthInput" value="300" step="25" onchange="updateSectionField('b', this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold mono">
+                    <input type="number" inputmode="decimal" id="beamWidthInput" value="230" step="25" onchange="updateSectionField('b', this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold mono">
                 </div>
                 <div>
                     <label class="block text-slate-400 font-semibold mb-1 text-[10px] uppercase">Depth D (mm)</label>
-                    <input type="number" inputmode="decimal" id="beamDepthInput" value="600" step="25" onchange="updateSectionField('D', this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold mono">
+                    <input type="number" inputmode="decimal" id="beamDepthInput" value="380" step="25" onchange="updateSectionField('D', this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold mono">
                 </div>
                 <div>
                     <label class="block text-slate-400 font-semibold mb-1 text-[10px] uppercase">Concrete Grade</label>
@@ -171,11 +177,11 @@
                 </div>
                 <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-2 flex flex-col justify-center">
                     <span class="text-[9px] text-slate-400 uppercase font-semibold">Moment of Inertia Ixx</span>
-                    <span id="displayValI" class="text-emerald-400 font-bold mono text-[11px] sm:text-xs">5.400 × 10⁻³ m⁴</span>
+                    <span id="displayValI" class="text-emerald-400 font-bold mono text-[11px] sm:text-xs">1.052 × 10⁻³ m⁴</span>
                 </div>
                 <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-2 flex flex-col justify-center">
                     <span class="text-[9px] text-slate-400 uppercase font-semibold">Self-Weight UDL</span>
-                    <span id="displayValSW" class="text-amber-400 font-bold mono text-xs sm:text-sm">4.50 kN/m</span>
+                    <span id="displayValSW" class="text-amber-400 font-bold mono text-xs sm:text-sm">2.19 kN/m</span>
                 </div>
             </div>
         </section>
@@ -220,7 +226,7 @@
                 </div>
                 <div class="flex items-center gap-1.5 text-xs">
                     <span class="text-slate-400">Configured Spans:</span>
-                    <span id="totalSpanCountBadge" class="bg-blue-600/30 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full font-bold mono">3 Spans</span>
+                    <span id="totalSpanCountBadge" class="bg-blue-600/30 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full font-bold mono">1 Span</span>
                 </div>
             </div>
 
@@ -231,7 +237,7 @@
                     <span class="text-[10px] text-slate-400 hidden sm:inline">(Every support point is directly controllable)</span>
                 </div>
                 <div id="allSupportsBar" class="flex flex-wrap items-center gap-2">
-                    <!-- Rendered dynamically for every node from 0 to nSpans -->
+                    <!-- Rendered dynamically -->
                 </div>
             </div>
 
@@ -285,7 +291,7 @@
             </div>
         </section>
 
-        <!-- STAAD.Pro Post-Processing Summary Table -->
+        <!-- Detailed STAAD.Pro Post-Processing Summary Table -->
         <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 sm:p-4 shadow-xl overflow-x-auto">
             <div class="flex flex-wrap justify-between items-center gap-2 mb-2.5">
                 <div class="flex items-center gap-2">
@@ -321,19 +327,19 @@
         <footer class="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-xs">
             <div class="bg-slate-900/80 border border-slate-800 p-2.5 sm:p-3 rounded-2xl text-center shadow">
                 <div class="text-[10px] text-slate-400 uppercase font-bold">Total Beam Length</div>
-                <div id="metricTotalLength" class="text-sm sm:text-base font-black text-white mono mt-0.5">10.00 m</div>
+                <div id="metricTotalLength" class="text-sm sm:text-base font-black text-white mono mt-0.5">0.00 m</div>
             </div>
             <div class="bg-slate-900/80 border border-slate-800 p-2.5 sm:p-3 rounded-2xl text-center shadow">
                 <div class="text-[10px] text-slate-400 uppercase font-bold">Max Support Hogging (-M)</div>
-                <div id="metricMaxHogging" class="text-sm sm:text-base font-black text-rose-400 mono mt-0.5">380.00 kNm</div>
+                <div id="metricMaxHogging" class="text-sm sm:text-base font-black text-rose-400 mono mt-0.5">0.00 kNm</div>
             </div>
             <div class="bg-slate-900/80 border border-slate-800 p-2.5 sm:p-3 rounded-2xl text-center shadow">
                 <div class="text-[10px] text-slate-400 uppercase font-bold">Max Mid Sagging (+M)</div>
-                <div id="metricMaxSagging" class="text-sm sm:text-base font-black text-emerald-400 mono mt-0.5">63.09 kNm</div>
+                <div id="metricMaxSagging" class="text-sm sm:text-base font-black text-emerald-400 mono mt-0.5">0.00 kNm</div>
             </div>
             <div class="bg-slate-900/80 border border-slate-800 p-2.5 sm:p-3 rounded-2xl text-center shadow">
                 <div class="text-[10px] text-slate-400 uppercase font-bold">Max Absolute Shear</div>
-                <div id="metricMaxShear" class="text-sm sm:text-base font-black text-sky-400 mono mt-0.5">227.71 kN</div>
+                <div id="metricMaxShear" class="text-sm sm:text-base font-black text-sky-400 mono mt-0.5">0.00 kN</div>
             </div>
         </footer>
 
@@ -373,7 +379,7 @@
                 </button>
             </div>
             <div id="galleryGridContainer" class="p-3 sm:p-5 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Standalone preview cards for each beam -->
+                <!-- Dynamically generated standalone preview cards -->
             </div>
         </div>
     </div>
@@ -386,8 +392,22 @@
 
 <script>
     // =========================================================================
-    // MULTI-BEAM PROJECT STATE DATA STRUCTURE
+    // MULTI-BEAM PROJECT STATE & MEMOIZATION CACHE
     // =========================================================================
+
+    const STORAGE_KEY = 'STAAD_EXACT_PROJECT_STORAGE_V3';
+    
+    // Custom useMemo execution cache
+    const solveMemoCache = new Map();
+
+    function useMemo(computeFn, key) {
+        if (solveMemoCache.has(key)) {
+            return solveMemoCache.get(key);
+        }
+        const result = computeFn();
+        solveMemoCache.set(key, result);
+        return result;
+    }
 
     let project = {
         activeBeamId: 'beam_1',
@@ -408,50 +428,178 @@
         return beam.spans[beam.spans.length - 1].labelEnd;
     }
 
-    // Factory to create a default beam instance
+    // Factory to create a beam instance (b=230mm, D=380mm, with 0s for fresh file)
     function createDefaultBeam(id, name, isBenchmark = false) {
         let spans = [];
         let supports = [];
 
         if (isBenchmark) {
-            // Exact benchmark: 3 Spans matching STAAD 380 kNm at Grid C
+            // STAAD Benchmark
             spans = [
                 { L: 3.0, continuity: 'CONTINUOUS', w: 40.0, P: 0.0, a: 1.5, labelStart: 'A', labelEnd: 'B' },
                 { L: 3.0, continuity: 'CONTINUOUS', w: 25.0, P: 180.0, a: 1.5, labelStart: 'B', labelEnd: 'C' },
                 { L: 4.0, continuity: 'CONTINUOUS', w: 95.0, P: 0.0, a: 2.0, labelStart: 'C', labelEnd: 'D' }
             ];
             supports = ['PINNED', 'PINNED', 'PINNED', 'PINNED'];
+            return {
+                id: id,
+                name: name,
+                sectionProps: {
+                    b: 300,
+                    D: 600,
+                    fck: 25,
+                    E: 25000,
+                    I: 5.4e-3,
+                    includeSW: false,
+                    swUDL: 4.5
+                },
+                spans: spans,
+                nodeSupports: supports,
+                totalLength: 0,
+                solvedMembers: [],
+                exactNodalMoments: [],
+                exactNodalReactions: [],
+                continuousFunctions: [],
+                criticalSnapPoints: []
+            };
         } else {
-            // General 2-span starter beam
+            // Fresh Blank Beam: b=230, D=380, L=0, w=0, P=0, a=0
             spans = [
-                { L: 4.0, continuity: 'CONTINUOUS', w: 25.0, P: 0.0, a: 2.0, labelStart: 'A', labelEnd: 'B' },
-                { L: 4.0, continuity: 'CONTINUOUS', w: 30.0, P: 40.0, a: 2.0, labelStart: 'B', labelEnd: 'C' }
+                { L: 0.0, continuity: 'CONTINUOUS', w: 0.0, P: 0.0, a: 0.0, labelStart: 'A', labelEnd: 'B' }
             ];
-            supports = ['PINNED', 'PINNED', 'PINNED'];
-        }
+            supports = ['PINNED', 'PINNED'];
 
-        return {
-            id: id,
-            name: name,
-            sectionProps: {
-                b: 300,
-                D: 600,
-                fck: 25,
-                E: 25000,
-                I: 5.4e-3,
-                includeSW: false,
-                swUDL: 4.5
-            },
-            spans: spans,
-            nodeSupports: supports,
-            // Solved state cache
-            totalLength: 0,
-            solvedMembers: [],
-            exactNodalMoments: [],
-            exactNodalReactions: [],
-            continuousFunctions: [],
-            criticalSnapPoints: []
+            // b=0.23m, D=0.38m, I = (0.23 * 0.38^3)/12 = 1.0517e-3 m4
+            const b_m = 0.23;
+            const D_m = 0.38;
+            const I_m4 = (b_m * Math.pow(D_m, 3)) / 12.0;
+            const sw = b_m * D_m * 25.0;
+
+            return {
+                id: id,
+                name: name,
+                sectionProps: {
+                    b: 230,
+                    D: 380,
+                    fck: 25,
+                    E: 25000,
+                    I: I_m4,
+                    includeSW: false,
+                    swUDL: sw
+                },
+                spans: spans,
+                nodeSupports: supports,
+                totalLength: 0,
+                solvedMembers: [],
+                exactNodalMoments: [],
+                exactNodalReactions: [],
+                continuousFunctions: [],
+                criticalSnapPoints: []
+            };
+        }
+    }
+
+    // =========================================================================
+    // LOCAL STORAGE PERSISTENCE
+    // =========================================================================
+
+    function saveProjectToStorage() {
+        try {
+            const dataToSave = {
+                activeBeamId: project.activeBeamId,
+                beams: project.beams.map(b => ({
+                    id: b.id,
+                    name: b.name,
+                    sectionProps: b.sectionProps,
+                    spans: b.spans,
+                    nodeSupports: b.nodeSupports
+                }))
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+        } catch (e) {
+            console.warn('LocalStorage save failed:', e);
+        }
+    }
+
+    function loadProjectFromStorage() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return false;
+            const parsed = JSON.parse(raw);
+            if (parsed && Array.isArray(parsed.beams) && parsed.beams.length > 0) {
+                project.beams = parsed.beams.map(b => {
+                    const fresh = createDefaultBeam(b.id, b.name, false);
+                    fresh.sectionProps = b.sectionProps || fresh.sectionProps;
+                    fresh.spans = b.spans || fresh.spans;
+                    fresh.nodeSupports = b.nodeSupports || fresh.nodeSupports;
+                    return fresh;
+                });
+                project.activeBeamId = parsed.activeBeamId || project.beams[0].id;
+                return true;
+            }
+        } catch (e) {
+            console.warn('LocalStorage parse failed:', e);
+        }
+        return false;
+    }
+
+    function clearAllBeams() {
+        if (!confirm('Are you sure you want to clear all beams and start fresh? All saved data will be reset.')) {
+            return;
+        }
+        localStorage.removeItem(STORAGE_KEY);
+        solveMemoCache.clear();
+
+        const freshBeam = createDefaultBeam('beam_1', 'Beam 1', false);
+        project.beams = [freshBeam];
+        project.activeBeamId = 'beam_1';
+        activeProbeX = 0.0;
+
+        renderBeamTabs();
+        loadActiveBeamIntoUI();
+        solveActiveBeam();
+        saveProjectToStorage();
+        showToast('All beams cleared! Fresh file loaded.', '🧹');
+    }
+
+    // =========================================================================
+    // NAVIGATOR SHARE API
+    // =========================================================================
+
+    async function shareProject() {
+        const beam = getActiveBeam();
+        const totalL = beam.totalLength ? beam.totalLength.toFixed(2) : "0.00";
+        const maxHog = document.getElementById('metricMaxHogging').innerText;
+        const maxSag = document.getElementById('metricMaxSagging').innerText;
+
+        const shareData = {
+            title: `${beam.name} - Continuous Beam Analysis`,
+            text: `Beam Analysis (${beam.name})\nLength: ${totalL}m | Max Hogging: ${maxHog} | Max Sagging: ${maxSag}`,
+            url: window.location.href
         };
+
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+                showToast('Shared successfully!', '📤');
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    fallbackCopyShare();
+                }
+            }
+        } else {
+            fallbackCopyShare();
+        }
+    }
+
+    function fallbackCopyShare() {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => showToast('Share link copied to clipboard!', '📋'))
+                .catch(() => showToast('Could not copy link.', '⚠️'));
+        } else {
+            showToast('Sharing not supported on this device.', '⚠️');
+        }
     }
 
     // =========================================================================
@@ -459,15 +607,20 @@
     // =========================================================================
 
     function initProject() {
-        const beam1 = createDefaultBeam('beam_1', 'Beam 1 (STAAD Benchmark)', true);
-        project.beams = [beam1];
-        project.activeBeamId = 'beam_1';
-
         setupCanvasHiDPI();
+
+        const hasSaved = loadProjectFromStorage();
+        if (!hasSaved) {
+            // Initialize fresh file with default b=230, D=380, all values 0
+            const beam1 = createDefaultBeam('beam_1', 'Beam 1', false);
+            project.beams = [beam1];
+            project.activeBeamId = 'beam_1';
+        }
+
         renderBeamTabs();
         loadActiveBeamIntoUI();
         solveActiveBeam();
-        activeProbeX = 6.0;
+        activeProbeX = 0.0;
         syncProbeUI();
         drawActiveBeamCanvas();
     }
@@ -507,6 +660,7 @@
         activeProbeX = 0.0;
         syncProbeUI();
         drawActiveBeamCanvas();
+        saveProjectToStorage();
         showToast(`Switched to: ${getActiveBeam().name}`, '🔄');
     }
 
@@ -525,6 +679,7 @@
         activeProbeX = 0;
         syncProbeUI();
         drawActiveBeamCanvas();
+        saveProjectToStorage();
         showToast(`${newName} Created!`, '✨');
     }
 
@@ -546,6 +701,7 @@
         activeProbeX = 0;
         syncProbeUI();
         drawActiveBeamCanvas();
+        saveProjectToStorage();
         showToast(`Duplicated into ${cloneName}`, '📑');
     }
 
@@ -565,6 +721,7 @@
         activeProbeX = 0;
         syncProbeUI();
         drawActiveBeamCanvas();
+        saveProjectToStorage();
         showToast(`Beam deleted.`, '🗑️');
     }
 
@@ -576,6 +733,7 @@
         document.getElementById('activeBeamSpanConfigTitle').innerText = active.name;
         document.getElementById('activeBeamTableTitle').innerText = active.name;
         document.getElementById('canvasTitleDisplay').innerText = `${active.name.toUpperCase()} - FULL CONTINUOUS ANALYSIS`;
+        saveProjectToStorage();
     }
 
     function loadActiveBeamIntoUI() {
@@ -606,6 +764,7 @@
         beam.sectionProps[field] = parseFloat(val) || 0;
         calculateActiveSectionProps();
         solveActiveBeam();
+        saveProjectToStorage();
     }
 
     function toggleSW() {
@@ -613,6 +772,7 @@
         beam.sectionProps.includeSW = document.getElementById('includeSelfWeightCheck').checked;
         calculateActiveSectionProps();
         solveActiveBeam();
+        saveProjectToStorage();
     }
 
     function calculateActiveSectionProps() {
@@ -674,7 +834,7 @@
         const beam = getActiveBeam();
         const container = document.getElementById('spansCardGrid');
         container.innerHTML = '';
-        document.getElementById('totalSpanCountBadge').innerText = `${beam.spans.length} Spans`;
+        document.getElementById('totalSpanCountBadge').innerText = `${beam.spans.length} Span${beam.spans.length > 1 ? 's' : ''}`;
 
         const nNodes = beam.spans.length + 1;
         while (beam.nodeSupports.length < nNodes) beam.nodeSupports.push('PINNED');
@@ -717,7 +877,7 @@
                                 <button onclick="stepSpanValue(${idx}, 'L', 0.5)" class="bg-slate-800 text-slate-300 hover:bg-slate-700 px-1 rounded text-[10px] font-bold">+</button>
                             </div>
                         </div>
-                        <input type="number" inputmode="decimal" step="0.1" min="0.5" max="30" value="${sp.L}" oninput="updateSpanNumeric(${idx}, 'L', this.value)" class="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-white font-bold mono">
+                        <input type="number" inputmode="decimal" step="0.1" min="0" max="30" value="${sp.L}" oninput="updateSpanNumeric(${idx}, 'L', this.value)" class="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-white font-bold mono">
                     </div>
                     <div>
                         <div class="flex justify-between items-center mb-0.5">
@@ -779,15 +939,15 @@
 
     function stepSpanValue(spanIdx, field, delta) {
         const beam = getActiveBeam();
-        let current = beam.spans[spanIdx][field];
+        let current = beam.spans[spanIdx][field] || 0;
         let newVal = Math.max(0, parseFloat((current + delta).toFixed(2)));
-        if (field === 'L' && newVal < 0.5) newVal = 0.5;
         beam.spans[spanIdx][field] = newVal;
         if (field === 'L' && beam.spans[spanIdx].a > newVal) {
             beam.spans[spanIdx].a = parseFloat((newVal / 2).toFixed(2));
         }
         renderActiveSpanCards();
         solveActiveBeam();
+        saveProjectToStorage();
     }
 
     function updateSpanNumeric(idx, field, val) {
@@ -795,13 +955,14 @@
         let num = parseFloat(val);
         if (isNaN(num)) num = 0;
         if (field === 'w' || field === 'P') num = Math.abs(num);
-        if (field === 'L' && num < 0.2) num = 0.5;
+        if (field === 'L' && num < 0) num = 0;
         beam.spans[idx][field] = num;
 
         if (field === 'L' && beam.spans[idx].a > num) {
             beam.spans[idx].a = num / 2;
         }
         solveActiveBeam();
+        saveProjectToStorage();
     }
 
     function updateSpanContinuity(idx, val) {
@@ -820,7 +981,6 @@
                 beam.nodeSupports[idx] = 'PINNED';
             }
         } else if (val === 'CONTINUOUS' || val === 'SIMPLY_SUPPORTED') {
-            // Restore support if it was previously set to FREE by a cantilever mode
             if (prevVal === 'CANTILEVER_LEFT' && beam.nodeSupports[idx] === 'FREE') {
                 beam.nodeSupports[idx] = 'PINNED';
             }
@@ -833,6 +993,7 @@
 
         renderActiveSpanCards();
         solveActiveBeam();
+        saveProjectToStorage();
         showToast(`Span ${idx + 1}: ${val.replace('_', ' ')}`, '🔄');
     }
 
@@ -842,13 +1003,13 @@
         updateViewSelector();
         renderActiveSpanCards();
         drawActiveBeamCanvas();
+        saveProjectToStorage();
     }
 
     function updateNodeSupport(idx, val) {
         const beam = getActiveBeam();
         beam.nodeSupports[idx] = val;
 
-        // Auto sync continuity states when an end node is changed
         if (idx === 0) {
             if (val === 'FREE') {
                 beam.spans[0].continuity = 'CANTILEVER_LEFT';
@@ -867,6 +1028,7 @@
 
         renderActiveSpanCards();
         solveActiveBeam();
+        saveProjectToStorage();
     }
 
     function addNewSpanToActiveBeam() {
@@ -889,9 +1051,9 @@
         beam.spans.push({
             L: 3.5,
             continuity: 'CONTINUOUS',
-            w: 25.0,
+            w: 0.0,
             P: 0.0,
-            a: 1.75,
+            a: 0.0,
             labelStart: startLab,
             labelEnd: endLab
         });
@@ -900,6 +1062,7 @@
         updateViewSelector();
         renderActiveSpanCards();
         solveActiveBeam();
+        saveProjectToStorage();
         showToast(`Span ${beam.spans.length} added to ${beam.name}!`, '➕');
     }
 
@@ -913,6 +1076,7 @@
         beam.nodeSupports.splice(idx + 1, 1);
         relabelActiveBeamGrids();
         solveActiveBeam();
+        saveProjectToStorage();
         showToast(`Span ${idx + 1} removed.`, '🗑️');
     }
 
@@ -934,6 +1098,7 @@
         updateViewSelector();
         renderActiveSpanCards();
         drawActiveBeamCanvas();
+        saveProjectToStorage();
     }
 
     function getAlphaLabel(idx) {
@@ -964,7 +1129,7 @@
     }
 
     // =========================================================================
-    // EXACT DIRECT STIFFNESS MATRIX SOLVER
+    // EXACT DIRECT STIFFNESS MATRIX SOLVER WITH useMemo CACHING
     // =========================================================================
 
     function solveBeam(beam) {
@@ -974,278 +1139,318 @@
         while (beam.nodeSupports.length < nNodes) beam.nodeSupports.push('PINNED');
         while (beam.nodeSupports.length > nNodes) beam.nodeSupports.pop();
 
-        beam.totalLength = beam.spans.reduce((sum, sp) => sum + sp.L, 0);
+        beam.totalLength = beam.spans.reduce((sum, sp) => sum + (parseFloat(sp.L) || 0), 0);
 
-        const E_kNm2 = beam.sectionProps.E * 1000.0;
-        const EI = E_kNm2 * beam.sectionProps.I;
-
-        const totalDOFs = 2 * nNodes;
-        let K_global = Array.from({ length: totalDOFs }, () => new Array(totalDOFs).fill(0));
-        let F_nodal = new Array(totalDOFs).fill(0);
-
-        let elementRecords = [];
-
-        beam.spans.forEach((sp, i) => {
-            const L = sp.L;
-            const wEffective = sp.w + (beam.sectionProps.includeSW ? beam.sectionProps.swUDL : 0);
-            const P = sp.P;
-            const a = Math.min(Math.max(sp.a, 0), L);
-            const b = L - a;
-
-            const n1 = i;
-            const n2 = i + 1;
-            const dofs = [2 * n1, 2 * n1 + 1, 2 * n2, 2 * n2 + 1];
-
-            const L2 = L * L;
-            const L3 = L2 * L;
-
-            let k_elem = [
-                [ 12 * EI / L3,   6 * EI / L2, -12 * EI / L3,   6 * EI / L2],
-                [  6 * EI / L2,   4 * EI / L,   -6 * EI / L2,   2 * EI / L ],
-                [-12 * EI / L3,  -6 * EI / L2,  12 * EI / L3,  -6 * EI / L2],
-                [  6 * EI / L2,   2 * EI / L,   -6 * EI / L2,   4 * EI / L ]
-            ];
-
-            const V_w = (wEffective * L) / 2.0;
-            const M_w = (wEffective * L2) / 12.0;
-
-            let V_p1 = 0, M_p1 = 0, V_p2 = 0, M_p2 = 0;
-            if (P > 0) {
-                V_p1 = (P * b * b * (3 * a + b)) / L3;
-                V_p2 = (P * a * a * (a + 3 * b)) / L3;
-                M_p1 = (P * a * b * b) / L2;
-                M_p2 = -(P * a * a * b) / L2;
-            }
-
-            let fe_fixed = [
-                V_w + V_p1,
-                M_w + M_p1,
-                V_w + V_p2,
-                -M_w + M_p2
-            ];
-
-            // If internal span has moment releases at both ends (Simply Supported)
-            if (sp.continuity === 'SIMPLY_SUPPORTED') {
-                const R1 = (wEffective * L / 2.0) + (P > 0 ? (P * b / L) : 0);
-                const R2 = (wEffective * L / 2.0) + (P > 0 ? (P * a / L) : 0);
-                k_elem = [
-                    [ 12 * EI / L3, 0, -12 * EI / L3, 0],
-                    [ 0,            1e-7 * EI / L, 0, 0],
-                    [-12 * EI / L3, 0,  12 * EI / L3, 0],
-                    [ 0,            0, 0, 1e-7 * EI / L]
-                ];
-                fe_fixed = [R1, 0, R2, 0];
-            }
-
-            for (let r = 0; r < 4; r++) {
-                for (let c = 0; c < 4; c++) {
-                    K_global[dofs[r]][dofs[c]] += k_elem[r][c];
-                }
-                F_nodal[dofs[r]] -= fe_fixed[r];
-            }
-
-            elementRecords.push({
-                k: k_elem,
-                fe: fe_fixed,
-                dofs: dofs,
-                L: L,
-                w: wEffective,
-                P: P,
-                a: a,
-                continuity: sp.continuity
-            });
-        });
-
-        // Boundary Restraints
-        let freeDOFs = [];
-        let restrainedDOFs = [];
-
-        for (let i = 0; i < nNodes; i++) {
-            const sup = beam.nodeSupports[i];
-            const vDOF = 2 * i;
-            const thetaDOF = 2 * i + 1;
-
-            if (sup === 'PINNED' || sup === 'ROLLER') {
-                restrainedDOFs.push(vDOF);
-                freeDOFs.push(thetaDOF);
-            } else if (sup === 'FIXED') {
-                restrainedDOFs.push(vDOF);
-                restrainedDOFs.push(thetaDOF);
-            } else if (sup === 'FREE') {
-                freeDOFs.push(vDOF);
-                freeDOFs.push(thetaDOF);
-            }
-        }
-
-        let U_disp = new Array(totalDOFs).fill(0);
-        const nF = freeDOFs.length;
-
-        // Stability Check
-        const hasFixed = beam.nodeSupports.some(s => s === 'FIXED');
-        const verticalRestraints = beam.nodeSupports.filter(s => s === 'PINNED' || s === 'ROLLER' || s === 'FIXED').length;
-        const isStable = hasFixed || verticalRestraints >= 2;
-
-        if (nF > 0 && isStable) {
-            let K_ff = Array.from({ length: nF }, () => new Array(nF).fill(0));
-            let F_f = new Array(nF).fill(0);
-
-            for (let r = 0; r < nF; r++) {
-                F_f[r] = F_nodal[freeDOFs[r]];
-                for (let c = 0; c < nF; c++) {
-                    K_ff[r][c] = K_global[freeDOFs[r]][freeDOFs[c]];
-                }
-            }
-
-            const u_solved = solveLinearSystem(K_ff, F_f);
-            for (let r = 0; r < nF; r++) {
-                U_disp[freeDOFs[r]] = u_solved[r];
-            }
-        }
-
-        beam.exactNodalReactions = new Array(nNodes).fill(0);
-        beam.exactNodalMoments = new Array(nNodes).fill(0);
-        beam.solvedMembers = [];
-        beam.continuousFunctions = [];
-        beam.criticalSnapPoints = [0];
-
-        let curX = 0;
-        elementRecords.forEach((elem, i) => {
-            const u_elem = [
-                U_disp[elem.dofs[0]],
-                U_disp[elem.dofs[1]],
-                U_disp[elem.dofs[2]],
-                U_disp[elem.dofs[3]]
-            ];
-
-            let f_res = [0, 0, 0, 0];
-            for (let r = 0; r < 4; r++) {
-                for (let c = 0; c < 4; c++) {
-                    f_res[r] += elem.k[r][c] * u_elem[c];
-                }
-                f_res[r] += elem.fe[r];
-            }
-
-            const L = elem.L;
-            const w = elem.w;
-            const P = elem.P;
-            const a = elem.a;
-
-            let V_start = 0, M_start = 0, V_end = 0, M_end = 0;
-
-            if (elem.continuity === 'SIMPLY_SUPPORTED') {
-                V_start = elem.fe[0];
-                M_start = 0.0;
-                V_end = -elem.fe[2];
-                M_end = 0.0;
-            } else {
-                V_start = f_res[0];
-                M_start = -f_res[1]; // Hogging negative
-                V_end = -f_res[2];
-                M_end = f_res[3];
-            }
-
-            // Clean numerical roundoffs
-            if (Math.abs(V_start) < 1e-4) V_start = 0;
-            if (Math.abs(V_end) < 1e-4) V_end = 0;
-            if (Math.abs(M_start) < 1e-4) M_start = 0;
-            if (Math.abs(M_end) < 1e-4) M_end = 0;
-
-            beam.exactNodalReactions[i] += f_res[0];
-            beam.exactNodalReactions[i + 1] += f_res[2];
-            beam.exactNodalMoments[i] = M_start;
-            beam.exactNodalMoments[i + 1] = M_end;
-
-            // Closed-form analytical continuous equations
-            const evalV = (xLoc) => {
-                let v = V_start - (w * xLoc);
-                if (xLoc >= a && P > 0) v -= P;
-                return v;
-            };
-
-            const evalM = (xLoc) => {
-                let m = M_start + (V_start * xLoc) - (w * xLoc * xLoc / 2.0);
-                if (xLoc >= a && P > 0) m -= P * (xLoc - a);
-                return m;
-            };
-
-            // Max Sagging
-            let maxSagXLoc = L / 2.0;
-            let maxSagValue = Math.max(M_start, M_end);
-
-            if (w > 0) {
-                const xZero1 = V_start / w;
-                if (xZero1 >= 0 && xZero1 <= a) {
-                    const mZero1 = evalM(xZero1);
-                    if (mZero1 > maxSagValue) {
-                        maxSagValue = mZero1;
-                        maxSagXLoc = xZero1;
-                    }
-                }
-                const xZero2 = (V_start - P) / w;
-                if (xZero2 >= a && xZero2 <= L) {
-                    const mZero2 = evalM(xZero2);
-                    if (mZero2 > maxSagValue) {
-                        maxSagValue = mZero2;
-                        maxSagXLoc = xZero2;
-                    }
-                }
-            }
-            if (P > 0 && a > 0 && a < L) {
-                const mAtP = evalM(a);
-                if (mAtP > maxSagValue) {
-                    maxSagValue = mAtP;
-                    maxSagXLoc = a;
-                }
-            }
-
-            beam.continuousFunctions.push({
-                xStart: curX,
-                xEnd: curX + L,
-                L: L,
-                evalV: evalV,
-                evalM: evalM,
-                maxSagXLoc: maxSagXLoc,
-                maxSagValue: maxSagValue
-            });
-
-            beam.solvedMembers.push({
+        // Safe guard for fresh file with 0 total length
+        if (beam.totalLength <= 0.001) {
+            beam.exactNodalReactions = new Array(nNodes).fill(0);
+            beam.exactNodalMoments = new Array(nNodes).fill(0);
+            beam.solvedMembers = beam.spans.map((sp, i) => ({
                 spanIdx: i,
-                labelStart: beam.spans[i].labelStart,
-                labelEnd: beam.spans[i].labelEnd,
-                continuity: beam.spans[i].continuity,
-                L: L,
-                startShear: V_start,
-                endShear: V_end,
-                startMoment: M_start,
-                endMoment: M_end,
-                maxSagging: maxSagValue,
-                maxSagGlobalX: curX + maxSagXLoc
+                labelStart: sp.labelStart,
+                labelEnd: sp.labelEnd,
+                continuity: sp.continuity,
+                L: sp.L || 0,
+                startShear: 0,
+                endShear: 0,
+                startMoment: 0,
+                endMoment: 0,
+                maxSagging: 0,
+                maxSagGlobalX: 0
+            }));
+            beam.continuousFunctions = [];
+            beam.criticalSnapPoints = [0];
+            return;
+        }
+
+        // Cache Key for useMemo
+        const memoKey = JSON.stringify({
+            spans: beam.spans,
+            nodeSupports: beam.nodeSupports,
+            sectionProps: beam.sectionProps
+        });
+
+        // Compute or retrieve from useMemo cache
+        const computationResult = useMemo(() => {
+            const E_kNm2 = beam.sectionProps.E * 1000.0;
+            const EI = E_kNm2 * beam.sectionProps.I;
+
+            const totalDOFs = 2 * nNodes;
+            let K_global = Array.from({ length: totalDOFs }, () => new Array(totalDOFs).fill(0));
+            let F_nodal = new Array(totalDOFs).fill(0);
+
+            let elementRecords = [];
+
+            beam.spans.forEach((sp, i) => {
+                const L = Math.max(0.001, sp.L || 0);
+                const wEffective = sp.w + (beam.sectionProps.includeSW ? beam.sectionProps.swUDL : 0);
+                const P = sp.P || 0;
+                const a = Math.min(Math.max(sp.a || 0, 0), L);
+                const b = L - a;
+
+                const n1 = i;
+                const n2 = i + 1;
+                const dofs = [2 * n1, 2 * n1 + 1, 2 * n2, 2 * n2 + 1];
+
+                const L2 = L * L;
+                const L3 = L2 * L;
+
+                let k_elem = [
+                    [ 12 * EI / L3,   6 * EI / L2, -12 * EI / L3,   6 * EI / L2],
+                    [  6 * EI / L2,   4 * EI / L,   -6 * EI / L2,   2 * EI / L ],
+                    [-12 * EI / L3,  -6 * EI / L2,  12 * EI / L3,  -6 * EI / L2],
+                    [  6 * EI / L2,   2 * EI / L,   -6 * EI / L2,   4 * EI / L ]
+                ];
+
+                const V_w = (wEffective * L) / 2.0;
+                const M_w = (wEffective * L2) / 12.0;
+
+                let V_p1 = 0, M_p1 = 0, V_p2 = 0, M_p2 = 0;
+                if (P > 0) {
+                    V_p1 = (P * b * b * (3 * a + b)) / L3;
+                    V_p2 = (P * a * a * (a + 3 * b)) / L3;
+                    M_p1 = (P * a * b * b) / L2;
+                    M_p2 = -(P * a * a * b) / L2;
+                }
+
+                let fe_fixed = [
+                    V_w + V_p1,
+                    M_w + M_p1,
+                    V_w + V_p2,
+                    -M_w + M_p2
+                ];
+
+                if (sp.continuity === 'SIMPLY_SUPPORTED') {
+                    const R1 = (wEffective * L / 2.0) + (P > 0 ? (P * b / L) : 0);
+                    const R2 = (wEffective * L / 2.0) + (P > 0 ? (P * a / L) : 0);
+                    k_elem = [
+                        [ 12 * EI / L3, 0, -12 * EI / L3, 0],
+                        [ 0,            1e-7 * EI / L, 0, 0],
+                        [-12 * EI / L3, 0,  12 * EI / L3, 0],
+                        [ 0,            0, 0, 1e-7 * EI / L]
+                    ];
+                    fe_fixed = [R1, 0, R2, 0];
+                }
+
+                for (let r = 0; r < 4; r++) {
+                    for (let c = 0; c < 4; c++) {
+                        K_global[dofs[r]][dofs[c]] += k_elem[r][c];
+                    }
+                    F_nodal[dofs[r]] -= fe_fixed[r];
+                }
+
+                elementRecords.push({
+                    k: k_elem,
+                    fe: fe_fixed,
+                    dofs: dofs,
+                    L: L,
+                    w: wEffective,
+                    P: P,
+                    a: a,
+                    continuity: sp.continuity
+                });
             });
 
-            beam.criticalSnapPoints.push(curX + L);
-            if (P > 0 && a > 0 && a < L) beam.criticalSnapPoints.push(curX + a);
-            beam.criticalSnapPoints.push(curX + maxSagXLoc);
+            // Boundary Restraints
+            let freeDOFs = [];
+            let restrainedDOFs = [];
 
-            curX += L;
-        });
+            for (let i = 0; i < nNodes; i++) {
+                const sup = beam.nodeSupports[i];
+                const vDOF = 2 * i;
+                const thetaDOF = 2 * i + 1;
 
-        beam.nodeSupports.forEach((sup, idx) => {
-            if (sup === 'FREE') beam.exactNodalReactions[idx] = 0.0;
-        });
+                if (sup === 'PINNED' || sup === 'ROLLER') {
+                    restrainedDOFs.push(vDOF);
+                    freeDOFs.push(thetaDOF);
+                } else if (sup === 'FIXED') {
+                    restrainedDOFs.push(vDOF);
+                    restrainedDOFs.push(thetaDOF);
+                } else if (sup === 'FREE') {
+                    freeDOFs.push(vDOF);
+                    freeDOFs.push(thetaDOF);
+                }
+            }
 
-        beam.criticalSnapPoints = Array.from(new Set(beam.criticalSnapPoints.map(p => parseFloat(p.toFixed(3))))).sort((a, b) => a - b);
+            let U_disp = new Array(totalDOFs).fill(0);
+            const nF = freeDOFs.length;
+
+            const hasFixed = beam.nodeSupports.some(s => s === 'FIXED');
+            const verticalRestraints = beam.nodeSupports.filter(s => s === 'PINNED' || s === 'ROLLER' || s === 'FIXED').length;
+            const isStable = hasFixed || verticalRestraints >= 2;
+
+            if (nF > 0 && isStable) {
+                let K_ff = Array.from({ length: nF }, () => new Array(nF).fill(0));
+                let F_f = new Array(nF).fill(0);
+
+                for (let r = 0; r < nF; r++) {
+                    F_f[r] = F_nodal[freeDOFs[r]];
+                    for (let c = 0; c < nF; c++) {
+                        K_ff[r][c] = K_global[freeDOFs[r]][freeDOFs[c]];
+                    }
+                }
+
+                const u_solved = solveLinearSystem(K_ff, F_f);
+                for (let r = 0; r < nF; r++) {
+                    U_disp[freeDOFs[r]] = u_solved[r];
+                }
+            }
+
+            let exactNodalReactions = new Array(nNodes).fill(0);
+            let exactNodalMoments = new Array(nNodes).fill(0);
+            let solvedMembers = [];
+            let continuousFunctions = [];
+            let criticalSnapPoints = [0];
+
+            let curX = 0;
+            elementRecords.forEach((elem, i) => {
+                const u_elem = [
+                    U_disp[elem.dofs[0]],
+                    U_disp[elem.dofs[1]],
+                    U_disp[elem.dofs[2]],
+                    U_disp[elem.dofs[3]]
+                ];
+
+                let f_res = [0, 0, 0, 0];
+                for (let r = 0; r < 4; r++) {
+                    for (let c = 0; c < 4; c++) {
+                        f_res[r] += elem.k[r][c] * u_elem[c];
+                    }
+                    f_res[r] += elem.fe[r];
+                }
+
+                const L = elem.L;
+                const w = elem.w;
+                const P = elem.P;
+                const a = elem.a;
+
+                let V_start = 0, M_start = 0, V_end = 0, M_end = 0;
+
+                if (elem.continuity === 'SIMPLY_SUPPORTED') {
+                    V_start = elem.fe[0];
+                    M_start = 0.0;
+                    V_end = -elem.fe[2];
+                    M_end = 0.0;
+                } else {
+                    V_start = f_res[0];
+                    M_start = -f_res[1];
+                    V_end = -f_res[2];
+                    M_end = f_res[3];
+                }
+
+                if (Math.abs(V_start) < 1e-4) V_start = 0;
+                if (Math.abs(V_end) < 1e-4) V_end = 0;
+                if (Math.abs(M_start) < 1e-4) M_start = 0;
+                if (Math.abs(M_end) < 1e-4) M_end = 0;
+
+                exactNodalReactions[i] += f_res[0];
+                exactNodalReactions[i + 1] += f_res[2];
+                exactNodalMoments[i] = M_start;
+                exactNodalMoments[i + 1] = M_end;
+
+                const evalV = (xLoc) => {
+                    let v = V_start - (w * xLoc);
+                    if (xLoc >= a && P > 0) v -= P;
+                    return v;
+                };
+
+                const evalM = (xLoc) => {
+                    let m = M_start + (V_start * xLoc) - (w * xLoc * xLoc / 2.0);
+                    if (xLoc >= a && P > 0) m -= P * (xLoc - a);
+                    return m;
+                };
+
+                let maxSagXLoc = L / 2.0;
+                let maxSagValue = Math.max(M_start, M_end);
+
+                if (w > 0) {
+                    const xZero1 = V_start / w;
+                    if (xZero1 >= 0 && xZero1 <= a) {
+                        const mZero1 = evalM(xZero1);
+                        if (mZero1 > maxSagValue) {
+                            maxSagValue = mZero1;
+                            maxSagXLoc = xZero1;
+                        }
+                    }
+                    const xZero2 = (V_start - P) / w;
+                    if (xZero2 >= a && xZero2 <= L) {
+                        const mZero2 = evalM(xZero2);
+                        if (mZero2 > maxSagValue) {
+                            maxSagValue = mZero2;
+                            maxSagXLoc = xZero2;
+                        }
+                    }
+                }
+                if (P > 0 && a > 0 && a < L) {
+                    const mAtP = evalM(a);
+                    if (mAtP > maxSagValue) {
+                        maxSagValue = mAtP;
+                        maxSagXLoc = a;
+                    }
+                }
+
+                continuousFunctions.push({
+                    xStart: curX,
+                    xEnd: curX + L,
+                    L: L,
+                    evalV: evalV,
+                    evalM: evalM,
+                    maxSagXLoc: maxSagXLoc,
+                    maxSagValue: maxSagValue
+                });
+
+                solvedMembers.push({
+                    spanIdx: i,
+                    labelStart: beam.spans[i].labelStart,
+                    labelEnd: beam.spans[i].labelEnd,
+                    continuity: beam.spans[i].continuity,
+                    L: L,
+                    startShear: V_start,
+                    endShear: V_end,
+                    startMoment: M_start,
+                    endMoment: M_end,
+                    maxSagging: maxSagValue,
+                    maxSagGlobalX: curX + maxSagXLoc
+                });
+
+                criticalSnapPoints.push(curX + L);
+                if (P > 0 && a > 0 && a < L) criticalSnapPoints.push(curX + a);
+                criticalSnapPoints.push(curX + maxSagXLoc);
+
+                curX += L;
+            });
+
+            beam.nodeSupports.forEach((sup, idx) => {
+                if (sup === 'FREE') exactNodalReactions[idx] = 0.0;
+            });
+
+            criticalSnapPoints = Array.from(new Set(criticalSnapPoints.map(p => parseFloat(p.toFixed(3))))).sort((a, b) => a - b);
+
+            return {
+                exactNodalReactions,
+                exactNodalMoments,
+                solvedMembers,
+                continuousFunctions,
+                criticalSnapPoints
+            };
+        }, memoKey);
+
+        beam.exactNodalReactions = computationResult.exactNodalReactions;
+        beam.exactNodalMoments = computationResult.exactNodalMoments;
+        beam.solvedMembers = computationResult.solvedMembers;
+        beam.continuousFunctions = computationResult.continuousFunctions;
+        beam.criticalSnapPoints = computationResult.criticalSnapPoints;
     }
 
     function solveActiveBeam() {
         const active = getActiveBeam();
         solveBeam(active);
 
-        // Update Probe Slider Max
-        document.getElementById('desktopProbeSlider').max = active.totalLength;
-        document.getElementById('mobileProbeSlider').max = active.totalLength;
+        document.getElementById('desktopProbeSlider').max = active.totalLength || 10;
+        document.getElementById('mobileProbeSlider').max = active.totalLength || 10;
         if (activeProbeX > active.totalLength) activeProbeX = active.totalLength;
 
-        criticalPoints = active.criticalSnapPoints;
+        criticalPoints = active.criticalSnapPoints || [0];
         populateActiveSTAADTable();
         syncProbeUI();
         drawActiveBeamCanvas();
@@ -1296,7 +1501,7 @@
     }
 
     // =========================================================================
-    // PROBE NAVIGATION (NO VIBRATION)
+    // PROBE NAVIGATION
     // =========================================================================
 
     function onProbeMove(val) {
@@ -1312,7 +1517,6 @@
         drawActiveBeamCanvas();
     }
 
-    // Stepper for +0.01m (Forward) and -0.01m (Backward)
     function stepProbe(delta) {
         const beam = getActiveBeam();
         let newX = parseFloat((activeProbeX + delta).toFixed(2));
@@ -1331,18 +1535,19 @@
         const relGrid = getRelativeGridInfo(beam, activeProbeX);
         const state = getBeamAnalyticalState(beam, activeProbeX);
 
-        // Desktop Badges
         document.getElementById('desktopProbePosBadge').innerText = `${activeProbeX.toFixed(2)}m (${relGrid.shortText})`;
         document.getElementById('desktopProbeV').innerText = state.V.toFixed(2) + " kN";
         document.getElementById('desktopProbeM').innerText = state.M.toFixed(2) + " kNm";
 
-        // Mobile Floating Sheet Badges
         document.getElementById('mobileProbeGridBadge').innerText = `${relGrid.fullText} [${activeProbeX.toFixed(2)}m]`;
         document.getElementById('mobileProbeV').innerText = state.V.toFixed(2) + " kN";
         document.getElementById('mobileProbeM').innerText = state.M.toFixed(2) + " kNm";
     }
 
     function getRelativeGridInfo(beam, x) {
+        if (!beam.spans || beam.spans.length === 0 || beam.totalLength <= 0.001) {
+            return { shortText: 'Grid A', fullText: 'At Grid A' };
+        }
         const clampedX = Math.max(0, Math.min(beam.totalLength, x));
         let accX = 0;
         for (let i = 0; i < beam.spans.length; i++) {
@@ -1436,19 +1641,18 @@
         const padRight = width - (width < 500 ? 50 : 80);
 
         let dispStart = 0;
-        let dispEnd = beam.totalLength;
+        let dispEnd = Math.max(1.0, beam.totalLength);
 
         if (opts.activeMode && opts.activeMode !== 'all') {
             const idx = parseInt(opts.activeMode);
             dispStart = 0;
             for (let i = 0; i < idx; i++) dispStart += beam.spans[i].L;
-            dispEnd = dispStart + beam.spans[idx].L;
+            dispEnd = dispStart + Math.max(1.0, beam.spans[idx].L);
         }
 
         const dispLength = Math.max(0.01, dispEnd - dispStart);
         const toPx = (x) => padLeft + ((x - dispStart) / dispLength) * (padRight - padLeft);
 
-        // Proportional Y levels
         const yBeam = height * 0.13;
         const ySFD = height * 0.38;
         const yGreenHUD = height * 0.52;
@@ -1472,7 +1676,6 @@
                 const px = toPx(accX);
                 const gLabel = getNodeLabel(beam, i);
 
-                // Vertical Grid Line
                 ctx.setLineDash([3, 3]);
                 ctx.strokeStyle = "#334155";
                 ctx.lineWidth = 1;
@@ -1482,7 +1685,6 @@
                 ctx.stroke();
                 ctx.setLineDash([]);
 
-                // Grid Head Bubble
                 ctx.fillStyle = "#0f172a";
                 ctx.strokeStyle = "#38bdf8";
                 ctx.lineWidth = 1.5;
@@ -1496,11 +1698,9 @@
                 ctx.textAlign = "center";
                 ctx.fillText(gLabel, px, yBeam - 28);
 
-                // Support Symbol
                 drawSupport(ctx, px, yBeam, beam.nodeSupports[i]);
 
-                // Reactions (Only if supported)
-                if (beam.nodeSupports[i] !== 'FREE') {
+                if (beam.nodeSupports[i] !== 'FREE' && beam.exactNodalReactions && beam.exactNodalReactions[i] !== undefined) {
                     ctx.fillStyle = "#34d399";
                     ctx.font = "bold 10px 'JetBrains Mono', monospace";
                     ctx.fillText(`${beam.exactNodalReactions[i].toFixed(1)} kN`, px, yBeam + 28);
@@ -1515,7 +1715,7 @@
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(toPx(Math.max(0, dispStart)), yBeam);
-        ctx.lineTo(toPx(Math.min(beam.totalLength, dispEnd)), yBeam);
+        ctx.lineTo(toPx(Math.min(dispEnd, Math.max(1.0, beam.totalLength))), yBeam);
         ctx.stroke();
         ctx.lineCap = "butt";
 
@@ -1530,7 +1730,6 @@
                 const x2 = toPx(Math.min(spEnd, dispEnd));
                 const wEff = sp.w + (beam.sectionProps.includeSW ? beam.sectionProps.swUDL : 0);
 
-                // UDL
                 if (wEff > 0) {
                     ctx.strokeStyle = "#f97316";
                     ctx.fillStyle = "#f97316";
@@ -1551,7 +1750,6 @@
                     ctx.fillText(`${wEff.toFixed(0)} kN/m`, (x1 + x2) / 2, yBeam - 20);
                 }
 
-                // Point Load
                 if (sp.P > 0 && (spStart + sp.a >= dispStart && spStart + sp.a <= dispEnd)) {
                     const pxP = toPx(spStart + sp.a);
                     ctx.strokeStyle = "#c084fc";
@@ -1679,7 +1877,7 @@
         for (let i = 0; i <= beam.spans.length; i++) {
             if (accX >= dispStart - 0.001 && accX <= dispEnd + 0.001) {
                 const px = toPx(accX);
-                const nodeM = beam.exactNodalMoments[i];
+                const nodeM = beam.exactNodalMoments ? beam.exactNodalMoments[i] || 0 : 0;
                 const yOff = (bmdMode === 'staad') ? (nodeM * scaleM) : (-nodeM * scaleM);
                 const py = yBMD + yOff;
 
@@ -1812,7 +2010,7 @@
         }
     }
 
-    // Touch & Pointer listeners for Main Canvas
+    // Pointer listeners for Main Canvas
     let isTouchingCanvas = false;
     mainCanvas.addEventListener('mousedown', (e) => { isTouchingCanvas = true; handleCanvasPointer(e); });
     mainCanvas.addEventListener('mousemove', (e) => { if (isTouchingCanvas) handleCanvasPointer(e); });
@@ -1835,7 +2033,7 @@
         const beam = getActiveBeam();
 
         if (activeMode === 'all') {
-            onProbeMove(ratio * beam.totalLength);
+            onProbeMove(ratio * (beam.totalLength || 0));
         } else {
             const idx = parseInt(activeMode);
             let startSpanX = 0;
@@ -1881,7 +2079,7 @@
             if (Math.abs(m.endShear) > overallMaxV) overallMaxV = Math.abs(m.endShear);
         });
 
-        document.getElementById('metricTotalLength').innerText = beam.totalLength.toFixed(2) + " m";
+        document.getElementById('metricTotalLength').innerText = (beam.totalLength || 0).toFixed(2) + " m";
         document.getElementById('metricMaxSagging').innerText = "+" + overallMaxSag.toFixed(2) + " kNm";
         document.getElementById('metricMaxHogging').innerText = Math.abs(overallMaxHog).toFixed(2) + " kNm";
         document.getElementById('metricMaxShear').innerText = overallMaxV.toFixed(2) + " kN";
@@ -1916,7 +2114,7 @@
                             <span class="w-2 h-2 rounded-full ${beam.id === project.activeBeamId ? 'bg-cyan-400' : 'bg-slate-600'}"></span>
                             ${beam.name}
                         </h4>
-                        <span class="text-[10px] text-slate-400 mono">${beam.spans.length} Spans • Length: ${beam.totalLength.toFixed(1)}m</span>
+                        <span class="text-[10px] text-slate-400 mono">${beam.spans.length} Spans • Length: ${(beam.totalLength || 0).toFixed(1)}m</span>
                     </div>
                     <button onclick="selectBeamFromGallery('${beam.id}')" class="bg-cyan-600/30 hover:bg-cyan-600 text-cyan-300 hover:text-white border border-cyan-500/40 text-[11px] font-bold px-2.5 py-1 rounded-lg transition active:scale-95">
                         Open in Workspace ➔
@@ -1983,6 +2181,7 @@
         activeProbeX = 6.0;
         syncProbeUI();
         drawActiveBeamCanvas();
+        saveProjectToStorage();
         showToast('380.00 kNm STAAD.Pro Benchmark Loaded!', '🎯');
     }
 
