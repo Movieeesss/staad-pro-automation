@@ -67,13 +67,13 @@
             <div>
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded tracking-wider uppercase shadow">
-                        STAAD EXACT MOBILE V3.0
+                        STAAD EXACT MOBILE V3.1
                     </span>
                     <span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded">
                         100% Closed-Form DSM
                     </span>
-                    <span class="bg-purple-500/20 border border-purple-500/40 text-purple-300 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
-                        📱 Touch HD / Haptic
+                    <span class="bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                        📱 Touch HD Precision
                     </span>
                 </div>
                 <h1 class="text-lg sm:text-xl md:text-2xl font-black tracking-tight text-white mt-1">
@@ -95,7 +95,7 @@
             </div>
         </header>
 
-        <!-- MULTI-BEAM TAB MANAGEMENT BAR (Horizontal Scrollable on Mobile) -->
+        <!-- MULTI-BEAM TAB MANAGEMENT BAR -->
         <section class="bg-slate-900/95 border border-slate-800 rounded-2xl p-2.5 sm:p-3 shadow-lg no-print">
             <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-2 mb-2">
                 <div class="flex items-center gap-2">
@@ -131,7 +131,7 @@
             </div>
         </section>
 
-        <!-- Section & Material Properties Accordion/Card -->
+        <!-- Section & Material Properties -->
         <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 sm:p-4 shadow-xl no-print">
             <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2.5 mb-2.5">
                 <div class="flex items-center gap-2">
@@ -210,7 +210,7 @@
             </div>
         </section>
 
-        <!-- Dynamic Span Configuration Cards with Mobile Touch Steppers -->
+        <!-- Dynamic Span Configuration Cards with Direct All-Supports Control -->
         <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 sm:p-4 shadow-xl no-print">
             <div class="flex flex-wrap justify-between items-center gap-2 mb-2.5 border-b border-slate-800 pb-2">
                 <div>
@@ -224,13 +224,24 @@
                 </div>
             </div>
 
+            <!-- ALL NODE SUPPORTS DIRECT QUICK BAR -->
+            <div class="mb-3 bg-slate-950/80 p-2.5 rounded-xl border border-cyan-500/30 flex flex-wrap items-center justify-between gap-2.5">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">🏛️ All Node Supports:</span>
+                    <span class="text-[10px] text-slate-400 hidden sm:inline">(Every support point is directly controllable)</span>
+                </div>
+                <div id="allSupportsBar" class="flex flex-wrap items-center gap-2">
+                    <!-- Rendered dynamically for every node from 0 to nSpans -->
+                </div>
+            </div>
+
             <!-- Responsive Grid Container for Span Cards -->
-            <div id="spansCardGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 max-h-[460px] overflow-y-auto pr-0.5">
+            <div id="spansCardGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 max-h-[480px] overflow-y-auto pr-0.5">
                 <!-- Span cards generated dynamically -->
             </div>
         </section>
 
-        <!-- Main Graphics Canvas (Retina High-Definition SFD & BMD with Touch Tracking) -->
+        <!-- Main Graphics Canvas -->
         <main class="bg-slate-900 border border-slate-800 rounded-2xl p-2.5 sm:p-4 shadow-2xl relative overflow-hidden">
             <div class="flex flex-wrap justify-between items-center mb-2 px-1 text-xs font-bold text-slate-400 gap-2">
                 <div class="flex items-center gap-2">
@@ -263,7 +274,7 @@
                 <div class="flex items-center gap-1 shrink-0">
                     <button onclick="jumpToPrevCritical()" title="Previous Critical Node" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2.5 py-1 rounded-lg border border-slate-700 transition">⏮</button>
                     <button onclick="jumpToNextCritical()" title="Next Critical Node" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2.5 py-1 rounded-lg border border-slate-700 transition">⏭</button>
-                    <!-- Added + and - Fine Stepper Buttons -->
+                    <!-- Fine Stepper Buttons -->
                     <button onclick="stepProbe(0.01)" title="+0.01m (Forward / Right)" class="bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 hover:text-cyan-300 font-black text-sm px-2.5 py-0.5 rounded-lg border border-cyan-500/40 transition active:scale-95 shadow">＋</button>
                     <button onclick="stepProbe(-0.01)" title="-0.01m (Backward / Left)" class="bg-slate-800 hover:bg-rose-900/60 text-rose-400 hover:text-rose-300 font-black text-sm px-2.5 py-0.5 rounded-lg border border-rose-500/40 transition active:scale-95 shadow">－</button>
                 </div>
@@ -274,7 +285,7 @@
             </div>
         </section>
 
-        <!-- Detailed STAAD.Pro Post-Processing Summary Table -->
+        <!-- STAAD.Pro Post-Processing Summary Table -->
         <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 sm:p-4 shadow-xl overflow-x-auto">
             <div class="flex flex-wrap justify-between items-center gap-2 mb-2.5">
                 <div class="flex items-center gap-2">
@@ -328,9 +339,7 @@
 
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- MOBILE THUMB-FRIENDLY FLOATING HUD SHEET (Visible on phones & small screens) -->
-    <!-- ========================================================================= -->
+    <!-- MOBILE THUMB-FRIENDLY FLOATING HUD SHEET -->
     <div id="mobileFloatingSheet" class="fixed bottom-2 left-2 right-2 sm:hidden bg-slate-900/95 border border-cyan-500/50 rounded-2xl p-2.5 shadow-2xl backdrop-blur-md z-40 flex flex-col gap-1.5 no-print">
         <div class="flex items-center justify-between text-xs">
             <div class="flex items-center gap-1.5">
@@ -340,7 +349,6 @@
             <div class="flex items-center gap-1">
                 <button onclick="jumpToPrevCritical()" class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700 text-xs font-bold active:bg-cyan-600">⏮ Prev</button>
                 <button onclick="jumpToNextCritical()" class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700 text-xs font-bold active:bg-cyan-600">Next ⏭</button>
-                <!-- Added + and - Fine Stepper Buttons for Mobile -->
                 <button onclick="stepProbe(0.01)" class="bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded border border-cyan-500/40 text-xs font-black active:bg-cyan-600">＋</button>
                 <button onclick="stepProbe(-0.01)" class="bg-slate-800 text-rose-400 px-2.5 py-0.5 rounded border border-rose-500/40 text-xs font-black active:bg-rose-600">－</button>
             </div>
@@ -352,9 +360,7 @@
         <input type="range" id="mobileProbeSlider" min="0" max="10" step="0.01" value="0" oninput="onProbeMove(parseFloat(this.value))" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer">
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- ALL BEAMS GALLERY MODAL (Dedicated Standalone Cards for EVERY Beam) -->
-    <!-- ========================================================================= -->
+    <!-- ALL BEAMS GALLERY MODAL -->
     <div id="galleryModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-5 hidden no-print">
         <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-6xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
             <div class="p-3 sm:p-4 border-b border-slate-800 flex justify-between items-center bg-slate-950/80">
@@ -367,7 +373,7 @@
                 </button>
             </div>
             <div id="galleryGridContainer" class="p-3 sm:p-5 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Dynamically generated standalone preview cards for each beam -->
+                <!-- Standalone preview cards for each beam -->
             </div>
         </div>
     </div>
@@ -393,6 +399,14 @@
 
     const mainCanvas = document.getElementById('beamCanvas');
     const mainCtx = mainCanvas.getContext('2d');
+
+    // Helper to get consistent node label
+    function getNodeLabel(beam, nodeIdx) {
+        if (!beam.spans || beam.spans.length === 0) return 'Node ' + (nodeIdx + 1);
+        if (nodeIdx === 0) return beam.spans[0].labelStart;
+        if (nodeIdx < beam.spans.length) return beam.spans[nodeIdx].labelStart;
+        return beam.spans[beam.spans.length - 1].labelEnd;
+    }
 
     // Factory to create a default beam instance
     function createDefaultBeam(id, name, isBenchmark = false) {
@@ -453,7 +467,7 @@
         renderBeamTabs();
         loadActiveBeamIntoUI();
         solveActiveBeam();
-        activeProbeX = 6.0; // Place probe on Grid C for initial 380 kNm STAAD match
+        activeProbeX = 6.0;
         syncProbeUI();
         drawActiveBeamCanvas();
     }
@@ -493,7 +507,6 @@
         activeProbeX = 0.0;
         syncProbeUI();
         drawActiveBeamCanvas();
-        triggerHaptic();
         showToast(`Switched to: ${getActiveBeam().name}`, '🔄');
     }
 
@@ -512,7 +525,6 @@
         activeProbeX = 0;
         syncProbeUI();
         drawActiveBeamCanvas();
-        triggerHaptic();
         showToast(`${newName} Created!`, '✨');
     }
 
@@ -521,7 +533,6 @@
         const cloneId = 'beam_' + Date.now();
         const cloneName = `${active.name} (Copy)`;
 
-        // Deep clone
         const clonedBeam = JSON.parse(JSON.stringify(active));
         clonedBeam.id = cloneId;
         clonedBeam.name = cloneName;
@@ -627,8 +638,37 @@
     }
 
     // =========================================================================
-    // SPAN CARDS & MOBILE STEPPER CONTROLS
+    // SPAN CARDS & DIRECT SUPPORTS CONTROL
     // =========================================================================
+
+    function renderAllSupportsBar() {
+        const beam = getActiveBeam();
+        const bar = document.getElementById('allSupportsBar');
+        if (!bar) return;
+        bar.innerHTML = '';
+
+        const nNodes = beam.spans.length + 1;
+        while (beam.nodeSupports.length < nNodes) beam.nodeSupports.push('PINNED');
+
+        for (let i = 0; i < nNodes; i++) {
+            const label = getNodeLabel(beam, i);
+            const curSup = beam.nodeSupports[i] || 'PINNED';
+
+            const nodeDiv = document.createElement('div');
+            nodeDiv.className = "flex items-center gap-1 bg-slate-900 border border-slate-700/80 rounded-lg px-2 py-1 text-xs";
+
+            nodeDiv.innerHTML = `
+                <span class="font-bold ${curSup === 'FREE' ? 'text-amber-400' : 'text-cyan-300'}">Node ${label}:</span>
+                <select onchange="updateNodeSupport(${i}, this.value)" class="bg-slate-950 text-white rounded border border-slate-700 px-1 py-0.5 text-[11px] font-semibold outline-none focus:border-cyan-400">
+                    <option value="PINNED" ${curSup === 'PINNED' ? 'selected' : ''}>Pinned (Δ=0)</option>
+                    <option value="ROLLER" ${curSup === 'ROLLER' ? 'selected' : ''}>Roller (Δ=0)</option>
+                    <option value="FIXED" ${curSup === 'FIXED' ? 'selected' : ''}>Fixed (Δ=0, θ=0)</option>
+                    <option value="FREE" ${curSup === 'FREE' ? 'selected' : ''}>Free</option>
+                </select>
+            `;
+            bar.appendChild(nodeDiv);
+        }
+    }
 
     function renderActiveSpanCards() {
         const beam = getActiveBeam();
@@ -636,7 +676,13 @@
         container.innerHTML = '';
         document.getElementById('totalSpanCountBadge').innerText = `${beam.spans.length} Spans`;
 
+        const nNodes = beam.spans.length + 1;
+        while (beam.nodeSupports.length < nNodes) beam.nodeSupports.push('PINNED');
+
+        renderAllSupportsBar();
+
         beam.spans.forEach((sp, idx) => {
+            const isLastSpan = idx === beam.spans.length - 1;
             const card = document.createElement('div');
             card.className = "bg-slate-950 border border-slate-800 rounded-xl p-3 shadow-md flex flex-col justify-between space-y-2.5 hover:border-slate-700 transition";
 
@@ -651,7 +697,7 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-1.5">
-                        <select onchange="updateSpanContinuity(${idx}, this.value)" class="bg-slate-900 text-[11px] rounded border border-slate-700 px-1.5 py-0.5 font-semibold ${sp.continuity === 'CONTINUOUS' ? 'text-cyan-300' : 'text-amber-300'} outline-none">
+                        <select onchange="updateSpanContinuity(${idx}, this.value)" class="bg-slate-900 text-[11px] rounded border border-slate-700 px-1.5 py-0.5 font-semibold ${sp.continuity === 'CONTINUOUS' ? 'text-cyan-300' : 'text-amber-300'} outline-none focus:border-cyan-400">
                             <option value="CONTINUOUS" ${sp.continuity === 'CONTINUOUS' ? 'selected' : ''}>Continuous</option>
                             <option value="SIMPLY_SUPPORTED" ${sp.continuity === 'SIMPLY_SUPPORTED' ? 'selected' : ''}>Simply Supported</option>
                             <option value="CANTILEVER_LEFT" ${sp.continuity === 'CANTILEVER_LEFT' ? 'selected' : ''}>Cantilever Left</option>
@@ -703,16 +749,29 @@
                     </div>
                 </div>
 
-                <!-- Support toggle on this span's left node -->
-                <div class="flex items-center justify-between text-[10px] sm:text-[11px] bg-slate-900/60 p-1 rounded border border-slate-800/80">
+                <!-- Start Node Support -->
+                <div class="flex items-center justify-between text-[10px] sm:text-[11px] bg-slate-900/60 p-1.5 rounded border border-slate-800/80">
                     <span class="text-slate-400 font-semibold">Node ${sp.labelStart} Support:</span>
-                    <select onchange="updateNodeSupport(${idx}, this.value)" class="bg-slate-950 text-white rounded border border-slate-700 px-1.5 py-0.5 font-medium outline-none">
+                    <select onchange="updateNodeSupport(${idx}, this.value)" class="bg-slate-950 text-white rounded border border-slate-700 px-1.5 py-0.5 font-medium outline-none focus:border-cyan-400">
                         <option value="PINNED" ${beam.nodeSupports[idx] === 'PINNED' ? 'selected' : ''}>Pinned (Δ=0)</option>
                         <option value="ROLLER" ${beam.nodeSupports[idx] === 'ROLLER' ? 'selected' : ''}>Roller (Δ=0)</option>
                         <option value="FIXED" ${beam.nodeSupports[idx] === 'FIXED' ? 'selected' : ''}>Fixed (Δ=0, θ=0)</option>
                         <option value="FREE" ${beam.nodeSupports[idx] === 'FREE' ? 'selected' : ''}>Free</option>
                     </select>
                 </div>
+
+                <!-- If this is the LAST span, also provide direct End Node Support control -->
+                ${isLastSpan ? `
+                <div class="flex items-center justify-between text-[10px] sm:text-[11px] bg-slate-900/60 p-1.5 rounded border border-cyan-500/40">
+                    <span class="text-cyan-300 font-bold">End Node ${sp.labelEnd} Support:</span>
+                    <select onchange="updateNodeSupport(${idx + 1}, this.value)" class="bg-slate-950 text-white rounded border border-slate-700 px-1.5 py-0.5 font-medium outline-none focus:border-cyan-400">
+                        <option value="PINNED" ${beam.nodeSupports[idx + 1] === 'PINNED' ? 'selected' : ''}>Pinned (Δ=0)</option>
+                        <option value="ROLLER" ${beam.nodeSupports[idx + 1] === 'ROLLER' ? 'selected' : ''}>Roller (Δ=0)</option>
+                        <option value="FIXED" ${beam.nodeSupports[idx + 1] === 'FIXED' ? 'selected' : ''}>Fixed (Δ=0, θ=0)</option>
+                        <option value="FREE" ${beam.nodeSupports[idx + 1] === 'FREE' ? 'selected' : ''}>Free (Cantilever Tip)</option>
+                    </select>
+                </div>
+                ` : ''}
             `;
             container.appendChild(card);
         });
@@ -729,7 +788,6 @@
         }
         renderActiveSpanCards();
         solveActiveBeam();
-        triggerHaptic();
     }
 
     function updateSpanNumeric(idx, field, val) {
@@ -748,22 +806,66 @@
 
     function updateSpanContinuity(idx, val) {
         const beam = getActiveBeam();
+        const prevVal = beam.spans[idx].continuity;
         beam.spans[idx].continuity = val;
-        if (val === 'CANTILEVER_LEFT') beam.nodeSupports[idx] = 'FREE';
-        if (val === 'CANTILEVER_RIGHT') beam.nodeSupports[idx + 1] = 'FREE';
+
+        if (val === 'CANTILEVER_LEFT') {
+            beam.nodeSupports[idx] = 'FREE';
+            if (beam.nodeSupports[idx + 1] === 'FREE') {
+                beam.nodeSupports[idx + 1] = 'PINNED';
+            }
+        } else if (val === 'CANTILEVER_RIGHT') {
+            beam.nodeSupports[idx + 1] = 'FREE';
+            if (beam.nodeSupports[idx] === 'FREE') {
+                beam.nodeSupports[idx] = 'PINNED';
+            }
+        } else if (val === 'CONTINUOUS' || val === 'SIMPLY_SUPPORTED') {
+            // Restore support if it was previously set to FREE by a cantilever mode
+            if (prevVal === 'CANTILEVER_LEFT' && beam.nodeSupports[idx] === 'FREE') {
+                beam.nodeSupports[idx] = 'PINNED';
+            }
+            if (prevVal === 'CANTILEVER_RIGHT' && beam.nodeSupports[idx + 1] === 'FREE') {
+                beam.nodeSupports[idx + 1] = 'PINNED';
+            }
+            if (beam.nodeSupports[idx] === 'FREE') beam.nodeSupports[idx] = 'PINNED';
+            if (beam.nodeSupports[idx + 1] === 'FREE') beam.nodeSupports[idx + 1] = 'PINNED';
+        }
+
+        renderActiveSpanCards();
         solveActiveBeam();
+        showToast(`Span ${idx + 1}: ${val.replace('_', ' ')}`, '🔄');
     }
 
     function updateSpanLabel(idx, field, val) {
         const beam = getActiveBeam();
         beam.spans[idx][field] = val.trim();
         updateViewSelector();
+        renderActiveSpanCards();
         drawActiveBeamCanvas();
     }
 
     function updateNodeSupport(idx, val) {
         const beam = getActiveBeam();
         beam.nodeSupports[idx] = val;
+
+        // Auto sync continuity states when an end node is changed
+        if (idx === 0) {
+            if (val === 'FREE') {
+                beam.spans[0].continuity = 'CANTILEVER_LEFT';
+            } else if (beam.spans[0].continuity === 'CANTILEVER_LEFT') {
+                beam.spans[0].continuity = 'CONTINUOUS';
+            }
+        }
+        if (idx === beam.spans.length) {
+            const lastIdx = beam.spans.length - 1;
+            if (val === 'FREE') {
+                beam.spans[lastIdx].continuity = 'CANTILEVER_RIGHT';
+            } else if (beam.spans[lastIdx].continuity === 'CANTILEVER_RIGHT') {
+                beam.spans[lastIdx].continuity = 'CONTINUOUS';
+            }
+        }
+
+        renderActiveSpanCards();
         solveActiveBeam();
     }
 
@@ -798,7 +900,6 @@
         updateViewSelector();
         renderActiveSpanCards();
         solveActiveBeam();
-        triggerHaptic();
         showToast(`Span ${beam.spans.length} added to ${beam.name}!`, '➕');
     }
 
@@ -863,7 +964,7 @@
     }
 
     // =========================================================================
-    // EXACT DIRECT STIFFNESS MATRIX SOLVER (FOR ANY BEAM)
+    // EXACT DIRECT STIFFNESS MATRIX SOLVER
     // =========================================================================
 
     function solveBeam(beam) {
@@ -898,62 +999,42 @@
             const L2 = L * L;
             const L3 = L2 * L;
 
-            let k_elem = Array.from({ length: 4 }, () => new Array(4).fill(0));
-            let fe_fixed = [0, 0, 0, 0];
+            let k_elem = [
+                [ 12 * EI / L3,   6 * EI / L2, -12 * EI / L3,   6 * EI / L2],
+                [  6 * EI / L2,   4 * EI / L,   -6 * EI / L2,   2 * EI / L ],
+                [-12 * EI / L3,  -6 * EI / L2,  12 * EI / L3,  -6 * EI / L2],
+                [  6 * EI / L2,   2 * EI / L,   -6 * EI / L2,   4 * EI / L ]
+            ];
 
-            if (sp.continuity === 'CONTINUOUS') {
-                k_elem = [
-                    [ 12 * EI / L3,   6 * EI / L2, -12 * EI / L3,   6 * EI / L2],
-                    [  6 * EI / L2,   4 * EI / L,   -6 * EI / L2,   2 * EI / L ],
-                    [-12 * EI / L3,  -6 * EI / L2,  12 * EI / L3,  -6 * EI / L2],
-                    [  6 * EI / L2,   2 * EI / L,   -6 * EI / L2,   4 * EI / L ]
-                ];
+            const V_w = (wEffective * L) / 2.0;
+            const M_w = (wEffective * L2) / 12.0;
 
-                const V_w = (wEffective * L) / 2.0;
-                const M_w = (wEffective * L2) / 12.0;
+            let V_p1 = 0, M_p1 = 0, V_p2 = 0, M_p2 = 0;
+            if (P > 0) {
+                V_p1 = (P * b * b * (3 * a + b)) / L3;
+                V_p2 = (P * a * a * (a + 3 * b)) / L3;
+                M_p1 = (P * a * b * b) / L2;
+                M_p2 = -(P * a * a * b) / L2;
+            }
 
-                let V_p1 = 0, M_p1 = 0, V_p2 = 0, M_p2 = 0;
-                if (P > 0) {
-                    V_p1 = (P * b * b * (3 * a + b)) / L3;
-                    V_p2 = (P * a * a * (a + 3 * b)) / L3;
-                    M_p1 = (P * a * b * b) / L2;
-                    M_p2 = -(P * a * a * b) / L2;
-                }
+            let fe_fixed = [
+                V_w + V_p1,
+                M_w + M_p1,
+                V_w + V_p2,
+                -M_w + M_p2
+            ];
 
-                fe_fixed = [
-                    V_w + V_p1,
-                    M_w + M_p1,
-                    V_w + V_p2,
-                    -M_w + M_p2
-                ];
-            } else if (sp.continuity === 'SIMPLY_SUPPORTED') {
-                const k_v = 12 * EI / L3;
-                k_elem[0][0] = k_v;  k_elem[0][2] = -k_v;
-                k_elem[2][0] = -k_v; k_elem[2][2] = k_v;
-
+            // If internal span has moment releases at both ends (Simply Supported)
+            if (sp.continuity === 'SIMPLY_SUPPORTED') {
                 const R1 = (wEffective * L / 2.0) + (P > 0 ? (P * b / L) : 0);
                 const R2 = (wEffective * L / 2.0) + (P > 0 ? (P * a / L) : 0);
+                k_elem = [
+                    [ 12 * EI / L3, 0, -12 * EI / L3, 0],
+                    [ 0,            1e-7 * EI / L, 0, 0],
+                    [-12 * EI / L3, 0,  12 * EI / L3, 0],
+                    [ 0,            0, 0, 1e-7 * EI / L]
+                ];
                 fe_fixed = [R1, 0, R2, 0];
-            } else if (sp.continuity === 'CANTILEVER_LEFT') {
-                k_elem = [
-                    [ 3 * EI / L3, 0, -3 * EI / L3,  3 * EI / L2],
-                    [ 0,           0,  0,            0          ],
-                    [-3 * EI / L3, 0,  3 * EI / L3, -3 * EI / L2],
-                    [ 3 * EI / L2, 0, -3 * EI / L2,  3 * EI / L ]
-                ];
-                const V_tot = wEffective * L + P;
-                const M_fixed_end = -(wEffective * L2 / 2.0) - (P * (L - a));
-                fe_fixed = [0, 0, V_tot, M_fixed_end];
-            } else if (sp.continuity === 'CANTILEVER_RIGHT') {
-                k_elem = [
-                    [ 3 * EI / L3,   3 * EI / L2, -3 * EI / L3, 0],
-                    [ 3 * EI / L2,   3 * EI / L,  -3 * EI / L2, 0],
-                    [-3 * EI / L3,  -3 * EI / L2,  3 * EI / L3, 0],
-                    [ 0,             0,            0,           0]
-                ];
-                const V_tot = wEffective * L + P;
-                const M_fixed_start = (wEffective * L2 / 2.0) + (P * a);
-                fe_fixed = [V_tot, M_fixed_start, 0, 0];
             }
 
             for (let r = 0; r < 4; r++) {
@@ -999,7 +1080,12 @@
         let U_disp = new Array(totalDOFs).fill(0);
         const nF = freeDOFs.length;
 
-        if (nF > 0 && restrainedDOFs.length >= 2) {
+        // Stability Check
+        const hasFixed = beam.nodeSupports.some(s => s === 'FIXED');
+        const verticalRestraints = beam.nodeSupports.filter(s => s === 'PINNED' || s === 'ROLLER' || s === 'FIXED').length;
+        const isStable = hasFixed || verticalRestraints >= 2;
+
+        if (nF > 0 && isStable) {
             let K_ff = Array.from({ length: nF }, () => new Array(nF).fill(0));
             let F_f = new Array(nF).fill(0);
 
@@ -1046,27 +1132,23 @@
 
             let V_start = 0, M_start = 0, V_end = 0, M_end = 0;
 
-            if (elem.continuity === 'CONTINUOUS') {
-                V_start = f_res[0];
-                M_start = -f_res[1]; // Hogging negative
-                V_end = -f_res[2];
-                M_end = f_res[3];
-            } else if (elem.continuity === 'SIMPLY_SUPPORTED') {
+            if (elem.continuity === 'SIMPLY_SUPPORTED') {
                 V_start = elem.fe[0];
                 M_start = 0.0;
                 V_end = -elem.fe[2];
                 M_end = 0.0;
-            } else if (elem.continuity === 'CANTILEVER_LEFT') {
-                V_start = 0.0;
-                M_start = 0.0;
+            } else {
+                V_start = f_res[0];
+                M_start = -f_res[1]; // Hogging negative
                 V_end = -f_res[2];
                 M_end = f_res[3];
-            } else if (elem.continuity === 'CANTILEVER_RIGHT') {
-                V_start = f_res[0];
-                M_start = -f_res[1];
-                V_end = 0.0;
-                M_end = 0.0;
             }
+
+            // Clean numerical roundoffs
+            if (Math.abs(V_start) < 1e-4) V_start = 0;
+            if (Math.abs(V_end) < 1e-4) V_end = 0;
+            if (Math.abs(M_start) < 1e-4) M_start = 0;
+            if (Math.abs(M_end) < 1e-4) M_end = 0;
 
             beam.exactNodalReactions[i] += f_res[0];
             beam.exactNodalReactions[i + 1] += f_res[2];
@@ -1214,21 +1296,14 @@
     }
 
     // =========================================================================
-    // PROBE NAVIGATION & HAPTIC VIBRATION
+    // PROBE NAVIGATION (NO VIBRATION)
     // =========================================================================
-
-    function triggerHaptic() {
-        if ('vibrate' in navigator) {
-            navigator.vibrate(12);
-        }
-    }
 
     function onProbeMove(val) {
         let snappedVal = val;
         for (const pt of criticalPoints) {
             if (Math.abs(val - pt) < 0.08) {
                 snappedVal = pt;
-                triggerHaptic();
                 break;
             }
         }
@@ -1237,7 +1312,7 @@
         drawActiveBeamCanvas();
     }
 
-    // Added: Fine stepper for +0.01m (Forward) and -0.01m (Backward)
+    // Stepper for +0.01m (Forward) and -0.01m (Backward)
     function stepProbe(delta) {
         const beam = getActiveBeam();
         let newX = parseFloat((activeProbeX + delta).toFixed(2));
@@ -1246,7 +1321,6 @@
         activeProbeX = newX;
         syncProbeUI();
         drawActiveBeamCanvas();
-        triggerHaptic();
     }
 
     function syncProbeUI() {
@@ -1297,14 +1371,12 @@
                 activeProbeX = sorted[i];
                 syncProbeUI();
                 drawActiveBeamCanvas();
-                triggerHaptic();
                 return;
             }
         }
         activeProbeX = sorted[0];
         syncProbeUI();
         drawActiveBeamCanvas();
-        triggerHaptic();
     }
 
     function jumpToNextCritical() {
@@ -1314,14 +1386,12 @@
                 activeProbeX = sorted[i];
                 syncProbeUI();
                 drawActiveBeamCanvas();
-                triggerHaptic();
                 return;
             }
         }
         activeProbeX = sorted[sorted.length - 1];
         syncProbeUI();
         drawActiveBeamCanvas();
-        triggerHaptic();
     }
 
     // =========================================================================
@@ -1361,7 +1431,6 @@
         mainCtx.restore();
     }
 
-    // Generic, reusable rendering function for Main Canvas AND Gallery Previews
     function renderBeamOnCanvas(ctx, beam, width, height, opts) {
         const padLeft = width < 500 ? 50 : 80;
         const padRight = width - (width < 500 ? 50 : 80);
@@ -1401,7 +1470,7 @@
         for (let i = 0; i <= beam.spans.length; i++) {
             if (accX >= dispStart - 0.001 && accX <= dispEnd + 0.001) {
                 const px = toPx(accX);
-                const gLabel = (i === 0) ? beam.spans[0].labelStart : beam.spans[i - 1].labelEnd;
+                const gLabel = getNodeLabel(beam, i);
 
                 // Vertical Grid Line
                 ctx.setLineDash([3, 3]);
@@ -1430,7 +1499,7 @@
                 // Support Symbol
                 drawSupport(ctx, px, yBeam, beam.nodeSupports[i]);
 
-                // Reactions
+                // Reactions (Only if supported)
                 if (beam.nodeSupports[i] !== 'FREE') {
                     ctx.fillStyle = "#34d399";
                     ctx.font = "bold 10px 'JetBrains Mono', monospace";
@@ -1536,7 +1605,7 @@
         ctx.lineWidth = 1.8;
         ctx.stroke();
 
-        // 3. GREEN HUD TRACKER BAND (Between SFD & BMD)
+        // 3. GREEN HUD TRACKER BAND
         if (opts.showProbe) {
             ctx.strokeStyle = "#1e293b";
             ctx.lineWidth = 1;
@@ -1547,13 +1616,11 @@
 
             const probePx = toPx(opts.probeX);
             if (opts.probeX >= dispStart && opts.probeX <= dispEnd) {
-                // Connection Pip
                 ctx.fillStyle = "#22c55e";
                 ctx.beginPath();
                 ctx.arc(probePx, yGreenHUD, 4, 0, Math.PI * 2);
                 ctx.fill();
 
-                // HUD Pill
                 const relGrid = getRelativeGridInfo(beam, opts.probeX);
                 const probeState = getBeamAnalyticalState(beam, opts.probeX);
                 const badgeW = width < 500 ? 190 : 230;
@@ -1607,7 +1674,7 @@
         ctx.lineWidth = 1.8;
         ctx.stroke();
 
-        // Exact Support Moments Peak dots & numbers
+        // Exact Support Moments
         accX = 0;
         for (let i = 0; i <= beam.spans.length; i++) {
             if (accX >= dispStart - 0.001 && accX <= dispEnd + 0.001) {
@@ -1665,7 +1732,7 @@
         for (let i = 0; i <= beam.spans.length; i++) {
             if (accX >= dispStart - 1e-4 && accX <= dispEnd + 1e-4) {
                 const gx = toPx(accX);
-                const gLabel = (i === 0) ? beam.spans[0].labelStart : beam.spans[i - 1].labelEnd;
+                const gLabel = getNodeLabel(beam, i);
                 ctx.font = "bold 9px 'JetBrains Mono', monospace";
                 ctx.fillStyle = "#38bdf8";
                 ctx.textAlign = "center";
@@ -1830,7 +1897,7 @@
         container.innerHTML = '';
 
         project.beams.forEach((beam) => {
-            solveBeam(beam); // Ensure latest solution
+            solveBeam(beam);
 
             let peakHog = 0, peakSag = 0;
             beam.solvedMembers.forEach(m => {
@@ -1874,7 +1941,6 @@
             card.innerHTML = cardHeader + canvasHtml + cardFooter;
             container.appendChild(card);
 
-            // Render Preview on small canvas
             setTimeout(() => {
                 const prevCanvas = document.getElementById(canvasId);
                 if (prevCanvas) {
@@ -1917,7 +1983,6 @@
         activeProbeX = 6.0;
         syncProbeUI();
         drawActiveBeamCanvas();
-        triggerHaptic();
         showToast('380.00 kNm STAAD.Pro Benchmark Loaded!', '🎯');
     }
 
