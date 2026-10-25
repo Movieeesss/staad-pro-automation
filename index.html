@@ -261,8 +261,11 @@
                 </div>
                 <input type="range" id="desktopProbeSlider" min="0" max="10" step="0.01" value="0" oninput="onProbeMove(parseFloat(this.value))" class="w-full cursor-pointer h-2 bg-slate-800 rounded-lg">
                 <div class="flex items-center gap-1 shrink-0">
-                    <button onclick="jumpToPrevCritical()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2.5 py-1 rounded-lg border border-slate-700 transition">⏮</button>
-                    <button onclick="jumpToNextCritical()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2.5 py-1 rounded-lg border border-slate-700 transition">⏭</button>
+                    <button onclick="jumpToPrevCritical()" title="Previous Critical Node" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2.5 py-1 rounded-lg border border-slate-700 transition">⏮</button>
+                    <button onclick="jumpToNextCritical()" title="Next Critical Node" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-2.5 py-1 rounded-lg border border-slate-700 transition">⏭</button>
+                    <!-- Added + and - Fine Stepper Buttons -->
+                    <button onclick="stepProbe(0.01)" title="+0.01m (Forward / Right)" class="bg-slate-800 hover:bg-cyan-900/60 text-cyan-400 hover:text-cyan-300 font-black text-sm px-2.5 py-0.5 rounded-lg border border-cyan-500/40 transition active:scale-95 shadow">＋</button>
+                    <button onclick="stepProbe(-0.01)" title="-0.01m (Backward / Left)" class="bg-slate-800 hover:bg-rose-900/60 text-rose-400 hover:text-rose-300 font-black text-sm px-2.5 py-0.5 rounded-lg border border-rose-500/40 transition active:scale-95 shadow">－</button>
                 </div>
             </div>
             <div class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 flex items-center gap-4 text-xs mono">
@@ -337,6 +340,9 @@
             <div class="flex items-center gap-1">
                 <button onclick="jumpToPrevCritical()" class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700 text-xs font-bold active:bg-cyan-600">⏮ Prev</button>
                 <button onclick="jumpToNextCritical()" class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700 text-xs font-bold active:bg-cyan-600">Next ⏭</button>
+                <!-- Added + and - Fine Stepper Buttons for Mobile -->
+                <button onclick="stepProbe(0.01)" class="bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded border border-cyan-500/40 text-xs font-black active:bg-cyan-600">＋</button>
+                <button onclick="stepProbe(-0.01)" class="bg-slate-800 text-rose-400 px-2.5 py-0.5 rounded border border-rose-500/40 text-xs font-black active:bg-rose-600">－</button>
             </div>
         </div>
         <div class="flex items-center justify-between text-[11px] mono bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800">
@@ -1229,6 +1235,18 @@
         activeProbeX = snappedVal;
         syncProbeUI();
         drawActiveBeamCanvas();
+    }
+
+    // Added: Fine stepper for +0.01m (Forward) and -0.01m (Backward)
+    function stepProbe(delta) {
+        const beam = getActiveBeam();
+        let newX = parseFloat((activeProbeX + delta).toFixed(2));
+        if (newX < 0) newX = 0;
+        if (newX > beam.totalLength) newX = parseFloat(beam.totalLength.toFixed(2));
+        activeProbeX = newX;
+        syncProbeUI();
+        drawActiveBeamCanvas();
+        triggerHaptic();
     }
 
     function syncProbeUI() {
